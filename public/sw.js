@@ -1,10 +1,11 @@
 const CACHE_NAME = 'growgame-v1';
+const BASE_PATH = '/GrowGame';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/logo.png',
-  '/Gpay.jpg',
-  '/manifest.json'
+  `${BASE_PATH}/`,
+  `${BASE_PATH}/index.html`,
+  `${BASE_PATH}/assets/logo.png`,
+  `${BASE_PATH}/assets/Gpay.jpg`,
+  `${BASE_PATH}/manifest.json`
 ];
 
 // Install event - cache assets
