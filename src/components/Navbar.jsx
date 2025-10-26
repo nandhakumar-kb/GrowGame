@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import SettingsPanel from './SettingsPanel';
 import StatsDashboard from './StatsDashboard';
 import AchievementsModal from './AchievementsModal';
+import FeedbackModal from './FeedbackModal';
 import soundManager from '../utils/soundManager';
 const Navbar = ({ setPage }) => {
   const [showDonation, setShowDonation] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
+  const [showFeedback, setShowFeedback] = useState(false);
   const handleClick = () => {
     soundManager.init();
     soundManager.playClick();
@@ -70,6 +72,18 @@ const Navbar = ({ setPage }) => {
               <button
                 onClick={() => {
                   handleClick();
+                  setShowFeedback(true);
+                }}
+                className="px-4 py-2 bg-gradient-to-r from-pink-600 to-rose-600 text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300 shadow-lg shadow-pink-500/30 flex items-center gap-2"
+                title="Send Feedback"
+                aria-label="Send feedback"
+              >
+                <span className="text-lg" aria-hidden="true">💬</span>
+                <span className="hidden lg:inline">Feedback</span>
+              </button>
+              <button
+                onClick={() => {
+                  handleClick();
                   setShowDonation(true);
                 }}
                 className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/30 flex items-center gap-2"
@@ -89,6 +103,8 @@ const Navbar = ({ setPage }) => {
       {showStats && <StatsDashboard onClose={() => setShowStats(false)} />}
 
       {showAchievements && <AchievementsModal onClose={() => setShowAchievements(false)} />}
+
+      {showFeedback && <FeedbackModal isOpen={showFeedback} onClose={() => setShowFeedback(false)} />}
 
       {showDonation && (
         <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[60] animate-fadeIn px-4">
