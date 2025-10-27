@@ -5,8 +5,11 @@ import path from 'path'
 
 // https://vitejs.dev/config/
 export default defineConfig(({ command }) => {
-  const isVercel = process.env.VERCEL === '1';
+  // Check multiple Vercel environment variables
+  const isVercel = process.env.VERCEL === '1' || process.env.VERCEL_ENV || process.env.VERCEL_URL;
   const base = isVercel ? '/' : (command === 'build' ? '/GrowGame/' : '/');
+  
+  console.log('Build environment:', { isVercel, base, command });
   
   return {
     plugins: [
