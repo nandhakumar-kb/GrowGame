@@ -61,15 +61,19 @@ const HomePage = ({ setPage }) => {
         </div>
 
         <div className="text-center mb-6">
-          <button
-            onClick={() => setShowDonation(true)}
-            className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50 text-base flex items-center gap-2 mx-auto"
-            aria-label="Support the developer with a donation"
-          >
-            <span className="text-xl" aria-hidden="true">💝</span>
-            <span>Support the Developer</span>
-            <span className="text-xl" aria-hidden="true">☕</span>
-          </button>
+        <button
+                onClick={() => {
+                  handleClick();
+                  // Open GPay image directly - Vite will process the path
+                  window.open('/assets/Gpay.jpg', '_blank');
+                }}
+                className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/30 flex items-center gap-2"
+                title="Support Developer"
+                aria-label="Support with donation"
+              >
+                <span className="text-lg" aria-hidden="true">💝</span>
+                <span className="hidden sm:inline">Donate</span>
+              </button>
           <p className="text-gray-400 mt-2 text-sm" aria-live="polite">
             Enjoying the games? Buy me a coffee! <span aria-hidden="true">❤️</span>
           </p>
