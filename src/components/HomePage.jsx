@@ -88,36 +88,36 @@ const HomePage = ({ setPage }) => {
             aria-labelledby="donation-title"
             aria-describedby="donation-description"
           >
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-4 sm:p-6 md:p-8 max-w-md w-full mx-4 border-4 border-green-500 shadow-2xl shadow-green-500/50 transform animate-scaleIn max-h-[90vh] overflow-y-auto">
-              <div className="text-center mb-4 sm:mb-6">
-                <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 animate-bounce" aria-hidden="true">🙏</div>
-                <h3 id="donation-title" className="text-2xl sm:text-4xl font-bold text-white mb-2">Support Development</h3>
-                <p id="donation-description" className="text-sm sm:text-base text-gray-400">Your support helps keep GrowGame free and awesome!</p>
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 max-w-md w-full mx-4 border-4 border-green-500 shadow-2xl shadow-green-500/50 transform animate-scaleIn">
+              <div className="text-center mb-6">
+                <div className="text-6xl mb-4 animate-bounce" aria-hidden="true">🙏</div>
+                <h3 id="donation-title" className="text-4xl font-bold text-white mb-2">Support Development</h3>
+                <p id="donation-description" className="text-gray-400">Your support helps keep GrowGame free and awesome!</p>
               </div>
-              <div className="bg-gray-900/50 rounded-xl p-3 sm:p-4 md:p-6 mb-4 sm:mb-6 border border-green-500/30">
-                <h4 className="text-base sm:text-xl font-bold text-green-400 mb-3 sm:mb-4 text-center">Scan to Donate via Google Pay</h4>
-                <div className="flex justify-center mb-3 sm:mb-4">
+              <div className="bg-gray-900/50 rounded-xl p-6 mb-6 border border-green-500/30">
+                <h4 className="text-xl font-bold text-green-400 mb-4 text-center">Scan to Donate via Google Pay</h4>
+                <div className="flex justify-center mb-4">
                   <img 
                     src={gpayImg} 
                     alt="Google Pay QR Code" 
-                    className="w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 object-contain rounded-lg border-2 border-green-500/50 shadow-lg"
+                    className="w-64 h-64 object-contain rounded-lg border-2 border-green-500/50 shadow-lg"
                   />
                 </div>
-                <p className="text-gray-300 text-center text-xs sm:text-sm">
+                <p className="text-gray-300 text-center text-sm">
                   Scan this QR code with any UPI app
                 </p>
               </div>
-              <div className="flex flex-col sm:flex-row gap-2 sm:gap-3">
+              <div className="flex gap-3">
                 <button
                   onClick={() => setShowDonation(false)}
-                  className="w-full py-2 sm:py-3 px-4 sm:px-6 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg text-sm sm:text-base"
+                  className="flex-1 py-3 px-6 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
                   aria-label="Close donation modal"
                 >
                   Close
                 </button>
                 <button
                   onClick={() => window.open(gpayImg, '_blank')}
-                  className="w-full py-2 sm:py-3 px-4 sm:px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50 text-sm sm:text-base"
+                  className="flex-1 py-3 px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50"
                   aria-label="View QR code full size in new tab"
                 >
                   View Full Size

@@ -41,16 +41,16 @@ const SettingsPanel = ({ onClose }) => {
       aria-labelledby="settings-title"
       aria-describedby="settings-description"
     >
-      <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-4 sm:p-6 md:p-8 max-w-md w-full mx-4 border-4 border-purple-500 shadow-2xl shadow-purple-500/50 transform animate-scaleIn max-h-[90vh] overflow-y-auto">
+      <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 max-w-md w-full mx-4 border-4 border-purple-500 shadow-2xl shadow-purple-500/50 transform animate-scaleIn">
         {/* Header */}
-        <div className="text-center mb-4 sm:mb-6">
-          <div className="text-4xl sm:text-6xl mb-3 sm:mb-4" aria-hidden="true">⚙️</div>
-          <h3 id="settings-title" className="text-2xl sm:text-4xl font-bold text-white mb-2">Settings</h3>
-          <p id="settings-description" className="text-sm sm:text-base text-gray-400">Customize your gaming experience</p>
+        <div className="text-center mb-6">
+          <div className="text-6xl mb-4" aria-hidden="true">⚙️</div>
+          <h3 id="settings-title" className="text-4xl font-bold text-white mb-2">Settings</h3>
+          <p id="settings-description" className="text-gray-400">Customize your gaming experience</p>
         </div>
 
         {/* Settings Options */}
-        <div className="space-y-3 sm:space-y-6 mb-4 sm:mb-6" role="group" aria-label="Settings options">
+        <div className="space-y-6 mb-6" role="group" aria-label="Settings options">
           {/* Dark Mode */}
           <div className="flex items-center justify-between p-4 bg-gray-900/50 rounded-xl border border-purple-500/30">
             <div className="flex items-center gap-3">
@@ -194,7 +194,7 @@ const SettingsPanel = ({ onClose }) => {
             soundManager.playClick();
             onClose();
           }}
-          className="w-full py-2 sm:py-4 px-4 sm:px-6 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/50 text-sm sm:text-base"
+          className="w-full py-4 px-6 bg-gradient-to-r from-purple-600 to-purple-700 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-purple-500/50"
           aria-label="Save settings and close panel"
         >
           Save & Close
