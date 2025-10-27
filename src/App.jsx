@@ -2,7 +2,6 @@
 import { SettingsProvider } from './context/SettingsContext';
 import Navbar from './components/Navbar';
 import HomePage from './components/HomePage';
-import InstallPrompt from './components/InstallPrompt';
 import AchievementNotification from './components/AchievementNotification';
 import ErrorBoundary from './components/ErrorBoundary';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -42,7 +41,6 @@ function App() {
             {page === 'breakout' && <BreakoutGame setPage={setPage} gamesList={GAMES_LIST} currentGame="breakout" />}
           </Suspense>
           
-          <InstallPrompt />
           <AchievementNotification />
         </div>
       </SettingsProvider>
