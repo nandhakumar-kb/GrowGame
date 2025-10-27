@@ -1,5 +1,7 @@
-const CACHE_NAME = 'growgame-v2'; // Increment version to force update
-const BASE_PATH = self.location.hostname === 'localhost' ? '' : '/GrowGame';
+const CACHE_NAME = 'growgame-v3'; // Increment version to force update
+// Detect if we're on GitHub Pages or other hosting
+const isGitHubPages = self.location.hostname.includes('github.io');
+const BASE_PATH = self.location.hostname === 'localhost' ? '' : (isGitHubPages ? '/GrowGame' : '');
 const urlsToCache = [
   `${BASE_PATH}/`,
   `${BASE_PATH}/index.html`,
