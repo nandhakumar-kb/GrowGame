@@ -5,9 +5,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && xcopy public\\assets dist\\assets\\ /E /I /Y && copy public\\manifest.prod.json dist\\manifest.json",
+    "build": "vite build",
+    "build:gh-pages": "vite build && xcopy public\\assets dist\\assets\\ /E /I /Y && copy public\\manifest.prod.json dist\\manifest.json",
     "preview": "vite preview",
-    "predeploy": "npm run build",
+    "predeploy": "npm run build:gh-pages",
     "deploy": "gh-pages -d dist"
   },
   "dependencies": {
