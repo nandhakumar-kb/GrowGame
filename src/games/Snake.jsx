@@ -6,7 +6,19 @@ import { useSettings } from '../context/SettingsContext';
 const SnakeGame = ({ setPage, gamesList, currentGame }) => {
   const { difficulty } = useSettings();
   const GRID_SIZE = 30;
-  const CELL_SIZE = 30;
+  
+  // Calculate cell size based on screen width - make it responsive
+  const getResponsiveCellSize = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth < 640) { // Mobile
+      return Math.floor((screenWidth - 32) / GRID_SIZE); // 32px for padding
+    } else if (screenWidth < 768) { // Tablet
+      return 20;
+    }
+    return 30; // Desktop
+  };
+  
+  const [CELL_SIZE, setCellSize] = useState(getResponsiveCellSize());
   const INITIAL_SNAKE = [{ x: 15, y: 15 }];
   const INITIAL_DIRECTION = { x: 1, y: 0 };
 
@@ -96,6 +108,15 @@ const SnakeGame = ({ setPage, gamesList, currentGame }) => {
   }, [gameOver, isPaused, gameStarted, food, generateFood, score]);
 
   useEffect(() => {
+    const handleResize = () => {
+      setCellSize(getResponsiveCellSize());
+    };
+    
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  useEffect(() => {
     const handleKeyPress = (e) => {
       if (!gameStarted && !gameOver && (e.key === ' ' || e.key.startsWith('Arrow'))) {
         e.preventDefault();
@@ -146,29 +167,34 @@ const SnakeGame = ({ setPage, gamesList, currentGame }) => {
       <div className="max-w-4xl mx-auto">
         <GameNavigation currentGame={currentGame} setPage={setPage} gamesList={gamesList} />
         
-        <div className="text-center mb-6">
-          <h2 className="text-4xl font-bold text-white mb-2 flex items-center justify-center gap-3">
+        <div className="text-center mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-2 flex items-center justify-center gap-2 sm:gap-3">
             🐍 <span className="bg-gradient-to-r from-green-400 to-emerald-500 bg-clip-text text-transparent">Snake Game</span>
           </h2>
-          <p className="text-gray-300 mb-4">Use Arrow Keys to move | Space to Pause</p>
-          <div className="flex items-center justify-center gap-8 mb-2">
-            <div className="text-2xl font-bold text-green-400">Score: {score}</div>
-            <div className="text-xl font-semibold text-yellow-400">🏆 Best: {highScore}</div>
-            <div className="text-lg text-gray-400">Speed: {Math.round((150 - speed) / 10) + 1}x</div>
+          <p className="text-sm sm:text-base text-gray-300 mb-3 sm:mb-4">Use Arrow Keys to move | Space to Pause</p>
+          <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 md:gap-8 mb-2">
+            <div className="text-lg sm:text-xl md:text-2xl font-bold text-green-400">Score: {score}</div>
+            <div className="text-base sm:text-lg md:text-xl font-semibold text-yellow-400">🏆 Best: {highScore}</div>
+            <div className="text-sm sm:text-base md:text-lg text-gray-400">Speed: {Math.round((150 - speed) / 10) + 1}x</div>
           </div>
-          <div className="flex justify-center gap-2 mb-4">
-            <span className="px-3 py-1 bg-green-500/20 border border-green-500 rounded-full text-green-400 text-sm">
+          <div className="flex flex-wrap justify-center gap-2 mb-3 sm:mb-4">
+            <span className="px-2 sm:px-3 py-1 bg-green-500/20 border border-green-500 rounded-full text-green-400 text-xs sm:text-sm">
               Length: {snake.length}
             </span>
-            {isPaused && <span className="px-3 py-1 bg-yellow-500/20 border border-yellow-500 rounded-full text-yellow-400 text-sm animate-pulse">⏸ PAUSED</span>}
-            {!gameStarted && !gameOver && <span className="px-3 py-1 bg-blue-500/20 border border-blue-500 rounded-full text-blue-400 text-sm animate-pulse">Press any key to start</span>}
+            {isPaused && <span className="px-2 sm:px-3 py-1 bg-yellow-500/20 border border-yellow-500 rounded-full text-yellow-400 text-xs sm:text-sm animate-pulse">⏸ PAUSED</span>}
+            {!gameStarted && !gameOver && <span className="px-2 sm:px-3 py-1 bg-blue-500/20 border border-blue-500 rounded-full text-blue-400 text-xs sm:text-sm animate-pulse">Press any key to start</span>}
           </div>
         </div>
 
-        <div className="flex justify-center mb-6">
+        <div className="flex justify-center mb-6 px-2">
           <div 
             className="relative bg-gradient-to-br from-gray-900 to-gray-800 border-4 border-green-500 rounded-xl shadow-2xl overflow-hidden"
-            style={{ width: GRID_SIZE * CELL_SIZE, height: GRID_SIZE * CELL_SIZE }}
+            style={{ 
+              width: GRID_SIZE * CELL_SIZE, 
+              height: GRID_SIZE * CELL_SIZE,
+              maxWidth: '100%',
+              aspectRatio: '1/1'
+            }}
           >
             {/* Grid pattern */}
             {Array.from({ length: GRID_SIZE }).map((_, y) =>
@@ -291,32 +317,32 @@ const SnakeGame = ({ setPage, gamesList, currentGame }) => {
 
         {/* Game Over Modal */}
         {gameOver && (
-          <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn">
-            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 max-w-md mx-4 border-4 border-red-500 shadow-2xl shadow-red-500/50 transform animate-scaleIn">
-              <div className="text-center mb-6">
-                <div className="text-6xl mb-4 animate-bounce">💀</div>
-                <h3 className="text-4xl font-bold text-white mb-2">Game Over!</h3>
-                <p className="text-gray-400">The snake bit itself!</p>
+          <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-50 animate-fadeIn px-4">
+            <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-4 sm:p-6 md:p-8 max-w-md w-full mx-4 border-4 border-red-500 shadow-2xl shadow-red-500/50 transform animate-scaleIn max-h-[90vh] overflow-y-auto">
+              <div className="text-center mb-4 sm:mb-6">
+                <div className="text-4xl sm:text-6xl mb-3 sm:mb-4 animate-bounce">💀</div>
+                <h3 className="text-2xl sm:text-4xl font-bold text-white mb-2">Game Over!</h3>
+                <p className="text-sm sm:text-base text-gray-400">The snake bit itself!</p>
               </div>
               
-              <div className="bg-gray-900/50 rounded-xl p-6 mb-6 border border-green-500/30">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-gray-400">Final Score</span>
-                  <span className="text-3xl font-bold text-green-400">{score}</span>
+              <div className="bg-gray-900/50 rounded-xl p-4 sm:p-6 mb-4 sm:mb-6 border border-green-500/30">
+                <div className="flex justify-between items-center mb-2 sm:mb-3">
+                  <span className="text-sm sm:text-base text-gray-400">Final Score</span>
+                  <span className="text-2xl sm:text-3xl font-bold text-green-400">{score}</span>
                 </div>
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-gray-400">Snake Length</span>
-                  <span className="text-2xl font-semibold text-emerald-400">{snake.length}</span>
+                <div className="flex justify-between items-center mb-2 sm:mb-3">
+                  <span className="text-sm sm:text-base text-gray-400">Snake Length</span>
+                  <span className="text-xl sm:text-2xl font-semibold text-emerald-400">{snake.length}</span>
                 </div>
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-400">High Score</span>
-                  <span className="text-2xl font-bold text-yellow-400">🏆 {highScore}</span>
+                  <span className="text-sm sm:text-base text-gray-400">High Score</span>
+                  <span className="text-xl sm:text-2xl font-bold text-yellow-400">🏆 {highScore}</span>
                 </div>
               </div>
 
               <button
                 onClick={resetGame}
-                className="w-full py-4 px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50 text-lg"
+                className="w-full py-3 sm:py-4 px-4 sm:px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50 text-base sm:text-lg"
               >
                 🔄 Play Again
               </button>
