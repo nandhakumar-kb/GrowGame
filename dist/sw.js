@@ -1,5 +1,5 @@
-const CACHE_NAME = 'growgame-v1';
-const BASE_PATH = '/GrowGame';
+const CACHE_NAME = 'growgame-v2'; // Increment version to force update
+const BASE_PATH = self.location.hostname === 'localhost' ? '' : '/GrowGame';
 const urlsToCache = [
   `${BASE_PATH}/`,
   `${BASE_PATH}/index.html`,

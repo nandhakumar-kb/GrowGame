@@ -27,7 +27,7 @@ const Navbar = ({ setPage }) => {
               className="flex items-center gap-3 hover:scale-110 transition-transform duration-300"
               aria-label="Go to home page"
             >
-              <img src="/assets/logo.png" alt="GrowGame Logo" className="h-10 w-10 object-contain" />
+              <img src={`${import.meta.env.BASE_URL}assets/logo.png`} alt="GrowGame Logo" className="h-10 w-10 object-contain" />
               <span className="text-2xl font-bold bg-gradient-to-r from-pink-500 via-purple-500 to-cyan-500 bg-clip-text text-transparent">
                 GrowGame
               </span>
@@ -118,7 +118,7 @@ const Navbar = ({ setPage }) => {
               <h4 className="text-xl font-bold text-green-400 mb-4 text-center">Scan to Donate via Google Pay</h4>
               <div className="flex justify-center mb-4">
                 <img 
-                  src="/assets/Gpay.jpg" 
+                  src={`${import.meta.env.BASE_URL}assets/Gpay.jpg`} 
                   alt="Google Pay QR Code" 
                   className="w-64 h-64 object-contain rounded-lg border-2 border-green-500/50 shadow-lg"
                 />
@@ -135,7 +135,7 @@ const Navbar = ({ setPage }) => {
                 Close
               </button>
               <button
-                onClick={() => window.open('/assets/Gpay.jpg', '_blank')}
+                onClick={() => window.open(`${import.meta.env.BASE_URL}assets/Gpay.jpg`, '_blank')}
                 className="flex-1 py-3 px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50"
               >
                 View Full Size
