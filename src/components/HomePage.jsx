@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import { GAMES_LIST } from '../constants/games';
+
+// Import GPay image so Vite can process it
+import gpayImg from '/assets/Gpay.jpg';
+
 const HomePage = ({ setPage }) => {
   const [showDonation, setShowDonation] = useState(false);
   return (
@@ -61,19 +65,15 @@ const HomePage = ({ setPage }) => {
         </div>
 
         <div className="text-center mb-6">
-        <button
-                onClick={() => {
-                  handleClick();
-                  // Open GPay image directly - Vite will process the path
-                  window.open('/assets/Gpay.jpg', '_blank');
-                }}
-                className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/30 flex items-center gap-2"
-                title="Support Developer"
-                aria-label="Support with donation"
-              >
-                <span className="text-lg" aria-hidden="true">💝</span>
-                <span className="hidden sm:inline">Donate</span>
-              </button>
+          <button
+            onClick={() => setShowDonation(true)}
+            className="px-6 py-3 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50 text-base flex items-center gap-2 mx-auto"
+            aria-label="Support the developer with a donation"
+          >
+            <span className="text-xl" aria-hidden="true">💝</span>
+            <span>Support the Developer</span>
+            <span className="text-xl" aria-hidden="true">☕</span>
+          </button>
           <p className="text-gray-400 mt-2 text-sm" aria-live="polite">
             Enjoying the games? Buy me a coffee! <span aria-hidden="true">❤️</span>
           </p>
@@ -98,7 +98,7 @@ const HomePage = ({ setPage }) => {
                 <h4 className="text-xl font-bold text-green-400 mb-4 text-center">Scan to Donate via Google Pay</h4>
                 <div className="flex justify-center mb-4">
                   <img 
-                    src="/Gpay.jpg" 
+                    src={gpayImg} 
                     alt="Google Pay QR Code" 
                     className="w-64 h-64 object-contain rounded-lg border-2 border-green-500/50 shadow-lg"
                   />
@@ -116,7 +116,7 @@ const HomePage = ({ setPage }) => {
                   Close
                 </button>
                 <button
-                  onClick={() => window.open('/Gpay.jpg', '_blank')}
+                  onClick={() => window.open(gpayImg, '_blank')}
                   className="flex-1 py-3 px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50"
                   aria-label="View QR code full size in new tab"
                 >
