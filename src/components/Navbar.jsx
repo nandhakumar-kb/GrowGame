@@ -5,12 +5,10 @@ import AchievementsModal from './AchievementsModal';
 import FeedbackModal from './FeedbackModal';
 import soundManager from '../utils/soundManager';
 
-// Import images so Vite can process them
+// Import logo image so Vite can process it
 import logoImg from '/assets/logo.png';
-import gpayImg from '/assets/Gpay.jpg';
 
 const Navbar = ({ setPage }) => {
-  const [showDonation, setShowDonation] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [showStats, setShowStats] = useState(false);
   const [showAchievements, setShowAchievements] = useState(false);
@@ -89,7 +87,8 @@ const Navbar = ({ setPage }) => {
               <button
                 onClick={() => {
                   handleClick();
-                  setShowDonation(true);
+                  // Open GPay image directly - Vite will process the path
+                  window.open('/assets/Gpay.jpg', '_blank');
                 }}
                 className="px-4 py-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-semibold rounded-lg hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/30 flex items-center gap-2"
                 title="Support Developer"
@@ -110,45 +109,6 @@ const Navbar = ({ setPage }) => {
       {showAchievements && <AchievementsModal onClose={() => setShowAchievements(false)} />}
 
       {showFeedback && <FeedbackModal isOpen={showFeedback} onClose={() => setShowFeedback(false)} />}
-
-      {showDonation && (
-        <div className="fixed inset-0 bg-black/90 backdrop-blur-sm flex items-center justify-center z-[60] animate-fadeIn px-4">
-          <div className="bg-gradient-to-br from-gray-800 to-gray-900 rounded-3xl p-8 max-w-md w-full mx-4 border-4 border-green-500 shadow-2xl shadow-green-500/50 transform animate-scaleIn">
-            <div className="text-center mb-6">
-              <div className="text-6xl mb-4 animate-bounce">🙏</div>
-              <h3 className="text-4xl font-bold text-white mb-2">Support Development</h3>
-              <p className="text-gray-400">Your support helps keep GrowGame free and awesome!</p>
-            </div>
-            <div className="bg-gray-900/50 rounded-xl p-6 mb-6 border border-green-500/30">
-              <h4 className="text-xl font-bold text-green-400 mb-4 text-center">Scan to Donate via Google Pay</h4>
-              <div className="flex justify-center mb-4">
-                <img 
-                  src={gpayImg} 
-                  alt="Google Pay QR Code" 
-                  className="w-64 h-64 object-contain rounded-lg border-2 border-green-500/50 shadow-lg"
-                />
-              </div>
-              <p className="text-gray-300 text-center text-sm">
-                Scan this QR code with any UPI app
-              </p>
-            </div>
-            <div className="flex gap-3">
-              <button
-                onClick={() => setShowDonation(false)}
-                className="flex-1 py-3 px-6 bg-gradient-to-r from-gray-600 to-gray-700 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg"
-              >
-                Close
-              </button>
-              <button
-                onClick={() => window.open(gpayImg, '_blank')}
-                className="flex-1 py-3 px-6 bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold rounded-xl hover:scale-105 transition-all duration-300 shadow-lg shadow-green-500/50"
-              >
-                View Full Size
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 };
